@@ -1,0 +1,7 @@
+ProjectTitle: app
+
+PageList:
+- file: page.html
+  ready: 100
+- file: glitch.html
+  ready: 100

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.5/dat.gui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.4/pixi.js"></script>
+    <script>
+      var app = new PIXI.Application(1066, 600);
+      document.body.appendChild(app.view);
+      var gui = new dat.GUI();
+      // Create background image
+      var background = PIXI.Sprite.fromImage("/img/bg.png");
+      background.width = 1066;
+      background.height = 600;
+      app.stage.addChild(background);
+      // Stop application wait for load to finish
+      app.stop();
+      PIXI.loader.add('shader', '/js/shader.frag').load(onLoaded);
+      var filter;
+      // Handle the load completed
+      function onLoaded(loader, res)
+      {
+        // Create the new filter, arguments: (vertexShader, framentSource)
+        filter = new PIXI.Filter(null, res.shader.data);
+        // Add the filter
+        background.filters = [filter];
+        gui.add(filter.uniforms, 'time', 0, 2);
+        // Resume application update
+        app.start();
+      }
+      // Animate the filter
+      app.ticker.add(function(delta)
+      {
+        // filter.uniforms.time += 0.004 * delta;
+      });
+
+    </script>
+  </body>
+
+</html>
