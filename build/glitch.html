@@ -14,13 +14,13 @@
       document.body.appendChild(app.view);
       var gui = new dat.GUI();
       // Create background image
-      var background = PIXI.Sprite.fromImage("/img/bg.png");
+      var background = PIXI.Sprite.fromImage("img/bg.png");
       background.width = 1066;
       background.height = 600;
       app.stage.addChild(background);
       // Stop application wait for load to finish
       app.stop();
-      PIXI.loader.add('shader', '/js/shader.frag').load(onLoaded);
+      PIXI.loader.add('shader', 'js/shader.frag').load(onLoaded);
       var filter;
       // Handle the load completed
       function onLoaded(loader, res)
